@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import HTMLFlipBook from 'react-pageflip';
 import styles from './libro.module.css';
-import { paginasData } from './datosLibro'; // Importamos los datos
+import { paginasData } from '../../data/datosLibro'; // Importamos los datos
 
 const Page = React.forwardRef((props, ref) => {
   return (
@@ -14,7 +14,7 @@ const Page = React.forwardRef((props, ref) => {
 
 export default function Libro() {
   return (
-    <Layout title="Nuestro Libro" description="Un libro virtual para mi amor">
+    <Layout title="Nuestro Libro" description="Un libro virtual para mi amor" noFooter={true} noNavbar={true}>
       <main className={styles.container}>
         <HTMLFlipBook
           width={400}
