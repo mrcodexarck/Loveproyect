@@ -1,112 +1,259 @@
+/* ============================================
+   🎛️ PANEL DE CONTROL - AJUSTA AQUÍ
+   ============================================ */
+:root {
+  /* --- COLORES DE LA PORTADA (cuero del libro) --- */
+  --color-cuero-claro: #8b5a2b;
+  --color-cuero-medio: #6d4423;
+  --color-cuero-oscuro: #4a2c14;
+  --color-dorado: #d4af37;
+  --color-texto-portada: #f4d78a;
+  
+  /* --- COLORES DE LAS PÁGINAS INTERIORES --- */
+  --color-papel: #f4e4c1;         /* Más claro: #faf0d8, Más oscuro: #e8d5a8 */
+  --color-texto-pagina: #3e2723;
+  --color-titulo-pagina: #6d3410;
+  
+  /* --- COLORES DEL FONDO (escritorio) --- */
+  --color-fondo-centro: #d4a574;
+  --color-fondo-borde: #6d4a2b;
+  
+  /* --- TAMAÑO Y FORMA --- */
+  --radio-esquinas: 12px;         /* 0 = cuadrado, 30px = muy redondeado */
+  --rotacion-titulo: -2deg;       /* Rotación del título de portada */
+  --rotacion-foto: -2deg;         /* Rotación de las fotos */
+  
+  /* --- SOMBRAS Y EFECTOS --- */
+  --sombra-libro: 0 25px 30px rgba(0, 0, 0, 0.5);
+  --sombra-foto: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Caveat:wght@400;700&display=swap');
+
+/* ============================================
+   CONTENEDOR PRINCIPAL
+   ============================================ */
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  /* Fondo degradado romántico */
-  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+  background: radial-gradient(circle at center, 
+    var(--color-fondo-centro) 0%, 
+    #a0714a 60%, 
+    var(--color-fondo-borde) 100%);
   padding: 40px 20px;
   box-sizing: border-box;
 }
 
-.page {
-  background-color: #fffaf0;
-  padding: 35px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  border: 1px solid #e0d5c5;
-  box-sizing: border-box;
-  overflow: hidden;
-  font-family: 'Georgia', 'Times New Roman', serif;
-  color: #4a3b32;
-  line-height: 1.8;
+.book {
+  filter: drop-shadow(var(--sombra-libro));
 }
 
-/* Estilo para el lomo del libro (la sombra central) */
-.page::after {
+/* ============================================
+   PÁGINAS INTERIORES
+   ============================================ */
+.page {
+  background-color: var(--color-papel);
+  background-image: 
+    radial-gradient(circle at 15% 25%, rgba(139, 69, 19, 0.08) 0%, transparent 30%),
+    radial-gradient(circle at 85% 70%, rgba(101, 67, 33, 0.1) 0%, transparent 25%),
+    linear-gradient(90deg, rgba(101, 67, 33, 0.15) 0%, transparent 8%, 
+                    transparent 92%, rgba(101, 67, 33, 0.1) 100%);
+  padding: 45px 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: 'Special Elite', 'Courier New', monospace;
+  color: var(--color-texto-pagina);
+  line-height: 1.8;
+  position: relative;
+}
+
+.page::before {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 2px;
-  background: rgba(0,0,0,0.05);
+  left: 0;
+  width: 25px;
+  background: linear-gradient(to right, rgba(101, 67, 33, 0.2), transparent);
+  pointer-events: none;
 }
 
 .page h2 {
-  color: #8b4513;
-  border-bottom: 2px solid #f8bbd0;
-  padding-bottom: 10px;
+  color: var(--color-titulo-pagina);
   margin-bottom: 20px;
-  font-size: 1.4rem;
+  font-family: 'Caveat', cursive;
+  font-size: 2rem;
+  font-weight: 700;
   text-align: center;
+  border-bottom: 2px dashed rgba(139, 69, 19, 0.4);
+  padding-bottom: 12px;
+  transform: rotate(-1deg);
 }
 
 .page p {
   font-size: 1rem;
   text-align: justify;
-  text-indent: 20px;
+  text-indent: 30px;
 }
 
-/* Portada y contraportada */
+/* ============================================
+   PORTADA Y CONTRAPORTADA
+   ============================================ */
 .cover,
 .coverBack {
-  background: linear-gradient(145deg, #8b4513, #5d2e0c);
-  color: #fff;
+  background: linear-gradient(135deg, 
+    var(--color-cuero-claro) 0%, 
+    var(--color-cuero-medio) 40%, 
+    var(--color-cuero-oscuro) 100%);
+  color: #f4e4c1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   height: 100%;
-  padding: 40px;
+  padding: 55px 45px;
   box-sizing: border-box;
-  border-radius: 0 8px 8px 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 var(--radio-esquinas) var(--radio-esquinas) 0;
+}
+
+/* Marco dorado interior */
+.cover::before,
+.coverBack::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  border: 2px solid rgba(212, 175, 55, 0.55);
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 0 0 3px rgba(139, 90, 43, 0.4),
+    inset 0 0 0 5px rgba(212, 175, 55, 0.3);
+  pointer-events: none;
 }
 
 .cover h1,
 .coverBack h1 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-  font-family: 'Georgia', serif;
-  letter-spacing: 3px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  font-size: 2.6rem;
+  margin-bottom: 20px;
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--color-texto-portada);
+  text-shadow: 
+    1px 1px 0 rgba(0, 0, 0, 0.4),
+    -1px -1px 0 rgba(255, 215, 100, 0.2);
+  z-index: 2;
+  position: relative;
+  transform: rotate(var(--rotacion-titulo));
+  line-height: 1.2;
 }
 
 .cover p,
 .coverBack p {
-  font-size: 1.2rem;
-  font-style: italic;
+  font-size: 1.4rem;
+  font-family: 'Caveat', cursive;
+  color: #f4e4c1;
+  z-index: 2;
+  position: relative;
+  transform: rotate(-1deg);
+  letter-spacing: 1px;
+}
+
+.cover p:first-of-type::before,
+.coverBack p:first-of-type::before {
+  content: '✦ ✦ ✦';
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  color: rgba(212, 175, 55, 0.8);
+  letter-spacing: 8px;
 }
 
 .fecha {
-  margin-top: 30px;
-  font-size: 0.9rem !important;
-  opacity: 0.8;
-  letter-spacing: 2px;
+  margin-top: 50px;
+  font-size: 1rem !important;
+  opacity: 0.85;
+  letter-spacing: 3px;
+  font-family: 'Special Elite', monospace !important;
+  transform: rotate(-1deg);
 }
 
 .corazon {
   font-size: 3rem !important;
-  margin-top: 20px;
+  margin-top: 25px;
   animation: latido 1.5s infinite;
+  filter: drop-shadow(0 0 10px rgba(255, 100, 100, 0.5));
 }
 
-/* Animación del corazón */
 @keyframes latido {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
 }
 
-/* Imágenes dentro de las páginas */
+/* ============================================
+   IMÁGENES
+   ============================================ */
 .imagen {
   max-width: 100%;
-  max-height: 250px;
+  max-height: 220px;
   object-fit: cover;
-  margin-top: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-top: 25px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  border: 4px solid #fff;
+  border: 8px solid #fffef7;
+  transform: rotate(var(--rotacion-foto));
+  transition: transform 0.3s ease;
+  box-shadow: var(--sombra-foto);
+  position: relative;
+}
+
+.imagen:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+
+.imagen::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: -20px;
+  width: 60px;
+  height: 25px;
+  background: rgba(255, 250, 205, 0.7);
+  border: 1px solid rgba(200, 180, 100, 0.4);
+  transform: rotate(-20deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+}
+
+/* ============================================
+   MENSAJE INFERIOR
+   ============================================ */
+.hint {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #f4e4c1;
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  opacity: 0.9;
+  animation: flotar 2.5s ease-in-out infinite;
+  text-align: center;
+  width: 100%;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  letter-spacing: 1px;
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, -10px); }
 }

@@ -32,10 +32,11 @@ export default function Libro() {
           usePortrait={true}
         >
           {/* ---- PORTADA (Fija) ---- */}
+              {/* ---- PORTADA ---- */}
           <Page>
             <div className={styles.cover}>
-              <h1>Nuestra Historia</h1>
-              <p>Para mi amor</p>
+              <h1>Mi Libro de<br/>Aventuras</h1>
+              <p>Nuestra Historia</p>
               <p className={styles.fecha}>Desde el primer día</p>
             </div>
           </Page>
@@ -52,11 +53,11 @@ export default function Libro() {
               />
             </Page>
           ))}
-
-          {/* ---- CONTRAPORTADA (Fija) ---- */}
+          
+          {/* ---- CONTRAPORTADA ---- */}
           <Page>
             <div className={styles.coverBack}>
-              <h1>Fin</h1>
+              <h1>Gracias por<br/>la aventura</h1>
               <p>Continuará...</p>
               <p className={styles.corazon}>❤️</p>
             </div>

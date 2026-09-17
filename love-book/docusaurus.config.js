@@ -53,12 +53,6 @@ const config = {
             label: '📖 Nuestro Libro',
             position: 'left',
           },
-          {
-            // ✅ Enlace a tu repositorio actualizado
-            href: 'https://github.com/mrcodexarck/Loveproyect',
-            label: 'GitHub',
-            position: 'right',
-          },
         ],
       },
       footer: {
